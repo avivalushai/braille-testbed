@@ -1,0 +1,6 @@
+# Larkfield Supply — a test site for Braille AI traffic capture.
+User-agent: *
+Allow: /
+Disallow: /private/
+
+Sitemap: https://larkfield-supply.netlify.app/sitemap.xml

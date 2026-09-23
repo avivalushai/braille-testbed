@@ -1,0 +1,20 @@
+# Larkfield Supply
+
+> An invented outdoor kit shop. This site exists to test how AI crawlers and
+> agents read an ordinary small shop, for Braille AI. Nothing is for sale.
+
+## Gear
+- [Fell 200 base layer](https://larkfield-supply.netlify.app/gear/base-layer): merino, 200gsm, £78
+- [Glenmore rain shell](https://larkfield-supply.netlify.app/gear/rain-shell): three layers, taped, £245
+- [Larkfield 45 pack](https://larkfield-supply.netlify.app/gear/pack): 45 litres, roll top, £160
+- [Peat gaiters](https://larkfield-supply.netlify.app/gear/gaiters): knee height, £45
+
+## Guides
+- [Layering for a wet week](https://larkfield-supply.netlify.app/guides/layering)
+- [Washing merino without ruining it](https://larkfield-supply.netlify.app/guides/washing-merino)
+- [Fitting a pack to your back length](https://larkfield-supply.netlify.app/guides/pack-fit)
+
+## Shop
+- [Pricing](https://larkfield-supply.netlify.app/pricing)
+- [About](https://larkfield-supply.netlify.app/about)
+- [Contact](https://larkfield-supply.netlify.app/contact)
