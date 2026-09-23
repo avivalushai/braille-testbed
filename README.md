@@ -8,8 +8,9 @@ check that the dashboard reports it correctly.
 
 One repository, one folder per site. Each hosting platform builds only its own
 folder: on Netlify that is the site's "base directory", on Vercel its "root
-directory". `shared/` holds the logger both Netlify sites run, so a fix to it
-reaches every site at once.
+directory". Each site carries its own copy of the logger: Netlify's edge bundler will not
+reach outside a site's base directory, and the SDK (C3) is what finally makes
+one copy serve every site.
 
 | Folder | Site | Where | What it tests |
 |---|---|---|---|
@@ -19,7 +20,7 @@ reaches every site at once.
 
 ## How capture works here
 
-`shared/netlify-traffic-logger.ts` records each page request and posts
+`marketing/netlify/edge-functions/traffic-logger.ts` records each page request and posts
 it to Braille's ingest endpoint after the page is served. It never delays a
 response, keeps an allowlist of headers, drops query-string values, and skips
 background fetches. Requests identifying as BrailleAI are marked synthetic, so

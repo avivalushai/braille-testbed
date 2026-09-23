@@ -1,16 +1,18 @@
 # Larkfield Supply: a static test site, published as it is.
 #
-# The edge function records every page request for Braille AI's Traffic
-# feature. It needs two environment variables, set in Netlify's own settings
-# and never in this repository:
+# No build step: `publish` is relative to this file's folder, which Netlify
+# calls the site's base directory (`marketing`). A `command` line is left out
+# entirely; an empty one fails the build.
+#
+# The edge function in netlify/edge-functions records every page request for
+# Braille AI's Traffic feature. It needs two environment variables, set in
+# Netlify's own settings and never in this repository:
 #
 #   TRAFFIC_INGEST_SECRET  the shared secret the ingest endpoint checks
 #   TRAFFIC_INGEST_URL     https://braille-ai-ebon.vercel.app/api/traffic/ingest
 
 [build]
-  # Relative to this file: Netlify runs each site from its own base directory.
   publish = "site"
-  command = ""
 
 [[headers]]
   for = "/*"
