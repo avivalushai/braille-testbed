@@ -15,7 +15,7 @@ one copy serve every site.
 | Folder | Site | Where | What it tests |
 |---|---|---|---|
 | `marketing/` | Larkfield Supply | Netlify, base directory `marketing` | An ordinary content site: crawler reads, robots.txt, sitemap, coverage |
-| `app/` | not built yet | Vercel, root directory `app` | Agent sessions: a login, a booking form, a CAPTCHA step, a thank-you page |
+| `app/` | Harbourline Stays | Vercel, root directory `app` | Agent sessions: a login, a booking form, a challenge, a thank-you page |
 | `docs/` | not built yet | Netlify, base directory `docs` | Coverage across many pages, and later the Cloudflare adapter |
 
 ## How capture works here
