@@ -6,16 +6,20 @@ check that the dashboard reports it correctly.
 
 ## Sites
 
-| Site | Where | What it tests |
-|---|---|---|
-| `site/` — Larkfield Supply | Netlify | An ordinary content site: crawler reads, robots.txt, sitemap, coverage |
+One repository, one folder per site. Each hosting platform builds only its own
+folder: on Netlify that is the site's "base directory", on Vercel its "root
+directory". `shared/` holds the logger both Netlify sites run, so a fix to it
+reaches every site at once.
 
-Two more follow: an app with a login and a checkout, for agent sessions and
-funnels, and a documentation site for coverage across many pages.
+| Folder | Site | Where | What it tests |
+|---|---|---|---|
+| `marketing/` | Larkfield Supply | Netlify, base directory `marketing` | An ordinary content site: crawler reads, robots.txt, sitemap, coverage |
+| `app/` | not built yet | Vercel, root directory `app` | Agent sessions: a login, a booking form, a CAPTCHA step, a thank-you page |
+| `docs/` | not built yet | Netlify, base directory `docs` | Coverage across many pages, and later the Cloudflare adapter |
 
 ## How capture works here
 
-`netlify/edge-functions/traffic-logger.ts` records each page request and posts
+`shared/netlify-traffic-logger.ts` records each page request and posts
 it to Braille's ingest endpoint after the page is served. It never delays a
 response, keeps an allowlist of headers, drops query-string values, and skips
 background fetches. Requests identifying as BrailleAI are marked synthetic, so
@@ -30,5 +34,6 @@ TRAFFIC_INGEST_URL      https://braille-ai-ebon.vercel.app/api/traffic/ingest
 
 ## Deploying
 
-Netlify builds from the default branch and publishes `site/` as it is. There is
-no build step. A push updates the live URL within about a minute.
+Netlify builds from the default branch. Each site sets its base directory —
+`marketing` for Larkfield Supply — and publishes that folder's `site/` as it
+is. There is no build step. A push updates the live URL within about a minute.

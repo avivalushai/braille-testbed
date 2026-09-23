@@ -8,6 +8,7 @@
 #   TRAFFIC_INGEST_URL     https://braille-ai-ebon.vercel.app/api/traffic/ingest
 
 [build]
+  # Relative to this file: Netlify runs each site from its own base directory.
   publish = "site"
   command = ""
 
