@@ -16,7 +16,7 @@ one copy serve every site.
 |---|---|---|---|
 | `marketing/` | Larkfield Supply | Netlify, base directory `marketing` | An ordinary content site: crawler reads, robots.txt, sitemap, coverage |
 | `app/` | Harbourline Stays | Vercel, root directory `app` | Agent sessions: a login, a booking form, a challenge, a thank-you page |
-| `docs/` | not built yet | Netlify, base directory `docs` | Coverage across many pages, and later the Cloudflare adapter |
+| `docs/` | Kestrel docs | Netlify, base directory `docs` | Coverage across many pages: 40 of them, some in the sitemap and linked from nowhere, one linked and left out of it, one whose content needs JavaScript |
 
 ## How capture works here
 

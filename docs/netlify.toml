@@ -1,0 +1,20 @@
+# Kestrel docs: a static test site, published as it is.
+#
+# No build step, and no `command` line: an empty one fails the build. `publish`
+# is relative to this file's folder, which Netlify calls the site's base
+# directory (`docs`).
+#
+# The edge function in netlify/edge-functions records every page request for
+# Braille AI's Traffic feature. It needs two environment variables, set in
+# Netlify's own settings and never in this repository:
+#
+#   TRAFFIC_INGEST_SECRET  the shared secret the ingest endpoint checks
+#   TRAFFIC_INGEST_URL     https://braille-ai-ebon.vercel.app/api/traffic/ingest
+
+[build]
+  publish = "site"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"

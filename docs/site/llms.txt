@@ -1,0 +1,19 @@
+# Kestrel
+
+> Documentation for an invented data-sync tool. Kestrel does not exist and
+> cannot be downloaded; these pages are here so Braille AI can watch how AI
+> crawlers read a documentation site.
+
+## Start here
+- [Install Kestrel](https://kestrel-docs.netlify.app/start/install)
+- [Your first sync](https://kestrel-docs.netlify.app/start/first-sync)
+- [Configuration file](https://kestrel-docs.netlify.app/start/configuration)
+- [Upgrading](https://kestrel-docs.netlify.app/start/upgrading)
+
+## Reference
+- [kestrel (command line)](https://kestrel-docs.netlify.app/reference/cli)
+- [kestrel run](https://kestrel-docs.netlify.app/reference/cli-run)
+- [kestrel plan](https://kestrel-docs.netlify.app/reference/cli-plan)
+- [kestrel status](https://kestrel-docs.netlify.app/reference/cli-status)
+- [[sync] settings](https://kestrel-docs.netlify.app/reference/config-sync)
+- [[endpoint] settings](https://kestrel-docs.netlify.app/reference/config-endpoint)

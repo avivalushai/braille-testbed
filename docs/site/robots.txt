@@ -1,0 +1,6 @@
+# Kestrel docs — a test site for Braille AI traffic capture.
+User-agent: *
+Allow: /
+Disallow: /internal/
+
+Sitemap: https://kestrel-docs.netlify.app/sitemap.xml
