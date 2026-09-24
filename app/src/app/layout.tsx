@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Script from "next/script";
 
 import "./globals.css";
 
@@ -25,6 +26,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </nav>
         </header>
         <main>{children}</main>
+        {/* What the edge logger cannot see: clicks, fields, the challenge, and whether a booking finished. */}
+        <Script src="https://braille-ai-ebon.vercel.app/traffic.js" strategy="afterInteractive" />
         <footer>
           <p>
             <strong>Test site.</strong> Harbourline Stays is not a real business. It exists to test AI traffic capture for Braille AI: no room exists, no
