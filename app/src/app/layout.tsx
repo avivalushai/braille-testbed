@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Script from "next/script";
 
+import { reportStatus } from "@/outcome";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -11,7 +13,11 @@ export const metadata: Metadata = {
   verification: { google: "_MSWsI9Pb9soJgUsM02nH2Zl9Oma5OP6OlZ0cntaYYs" },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // This app renders every page per request, so telling Traffic what was
+  // answered costs nothing. A 404 or an error overwrites this at the other end.
+  await reportStatus(200);
+
   return (
     <html lang="en">
       <body>

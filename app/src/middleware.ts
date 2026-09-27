@@ -10,10 +10,12 @@ import { SESSION_COOKIE } from "@/session";
  * this platform, as the SDK (C3) has not replaced it yet. It never delays a
  * response, keeps an allowlist of headers, drops query-string values, and
  * skips a page's background fetches. Middleware runs before the page answers,
- * so the status is only known where this file answers for itself.
+ * so it stamps each request with an id and forwards it; the app reports the
+ * status it produced against that id once the response is done (src/outcome.ts).
  */
 
 const SIGNED_IN_ONLY = ["/book/verify", "/account"];
+export const REQUEST_ID_HEADER = "x-braille-request";
 const HEADER_ALLOWLIST = ["accept", "from", "referer", "signature", "signature-agent", "signature-input"];
 const HEADER_MAX = 512;
 
@@ -27,7 +29,7 @@ function isBackgroundFetch(request: NextRequest): boolean {
   return request.headers.get("sec-fetch-dest") === "empty" || request.headers.has("next-url") || request.nextUrl.searchParams.has("_rsc");
 }
 
-function record(request: NextRequest, event: NextFetchEvent, status: number | null) {
+function record(request: NextRequest, event: NextFetchEvent, status: number | null, requestId: string | null = null) {
   const secret = process.env.TRAFFIC_INGEST_SECRET;
   const ingest = process.env.TRAFFIC_INGEST_URL;
   if (!secret || !ingest || isBackgroundFetch(request)) return;
@@ -55,11 +57,12 @@ function record(request: NextRequest, event: NextFetchEvent, status: number | nu
             path: url.pathname,
             queryKeys: [...new Set(url.searchParams.keys())].slice(0, 32),
             status,
+            requestId,
             userAgent: userAgent?.slice(0, 1024) ?? null,
             ip: request.headers.get("x-real-ip") ?? request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null,
             headers,
             synthetic: /brailleai/i.test(userAgent ?? ""),
-            logger: "next-middleware/1",
+            logger: "next-middleware/2",
           },
         ],
       }),
@@ -79,8 +82,12 @@ export function middleware(request: NextRequest, event: NextFetchEvent) {
     return NextResponse.redirect(signin);
   }
 
-  record(request, event, null);
-  return NextResponse.next();
+  // Forwarded to the app, which is the only thing that knows what it answered.
+  const requestId = crypto.randomUUID();
+  const headers = new Headers(request.headers);
+  headers.set(REQUEST_ID_HEADER, requestId);
+  record(request, event, null, requestId);
+  return NextResponse.next({ request: { headers } });
 }
 
 export const config = {
