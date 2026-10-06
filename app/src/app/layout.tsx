@@ -32,8 +32,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           </nav>
         </header>
         <main>{children}</main>
-        {/* What the edge logger cannot see: clicks, fields, the challenge, and whether a booking finished. */}
-        <Script src="https://braille-ai-ebon.vercel.app/traffic.js" strategy="afterInteractive" />
+        {/* What the edge logger cannot see: clicks, fields, the challenge, and
+            whether a booking finished.
+
+            beforeInteractive, not afterInteractive: loaded after hydration, the
+            snippet did not exist when /thank-you announced its conversion, and
+            two completed bookings were recorded as sessions that simply
+            stopped. The snippet also replays queued calls now, so this is belt
+            and braces — a site that cannot load it early has the stub. */}
+        <Script src="https://braille-ai-ebon.vercel.app/traffic.js" strategy="beforeInteractive" />
         <footer>
           <p>
             <strong>Test site.</strong> Harbourline Stays is not a real business. It exists to test AI traffic capture for Braille AI: no room exists, no
